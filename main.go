@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	c "askBox/controller"
 )
 
 func main() {
@@ -11,6 +12,8 @@ func main() {
 	router.LoadHTMLGlob("views/*")
 
 	router.GET("/", indexGet)
+	router.GET("/login", c.LoginGet)
+	router.GET("/signup", c.SignupGet)
 	router.Run(":8080")
 }
 
