@@ -14,6 +14,7 @@ func main() {
 	router.GET("/", indexGet)
 	router.GET("/login", c.LoginGet)
 	router.GET("/signup", c.SignupGet)
+	router.POST("/signup", c.Signup)
 	router.Run(":8080")
 }
 

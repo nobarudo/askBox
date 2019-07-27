@@ -1,9 +1,20 @@
 {{template "header"}}
-{{template "navbar"}}
-<main role="main" class="container">
-  <div class="jumbotron">
-    <h1>新規登録</h1>
+<link rel="stylesheet" href="./public/css/index.css">
+<link rel="stylesheet" href="./public/css/signup.css">
 
-  </div>
+</head>
+<body class="text-center">
+{{template "navbar"}}
+
+  <h1>新規登録</h1>
+  <form class="form-signup" action="/signup" method="POST">
+    <label for="userid" class="sr-only">UserID</label>
+    <input type="text" id="userID" name="userID" class="form-control" placeholder="UserID" required autofocus>
+    <label for="inputEmail" class="sr-only">User Name</label>
+    <input type="text" id="userName" name="userName" class="form-control" placeholder="User Name" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+  </form>
 </main>
 {{template "footer"}}
