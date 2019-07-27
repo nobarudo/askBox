@@ -8,14 +8,6 @@ import (
 	"log"
 )
 
-func LoginGet(c *gin.Context) {
-	c.HTML(http.StatusOK, "login.html", gin.H{})
-}
-
-func SignupGet(c *gin.Context) {
-	c.HTML(http.StatusOK, "signup.html", gin.H{})
-}
-
 func Signup(c *gin.Context) {
 	c.Request.ParseForm()
 	name := c.Request.Form["userID"][0]
