@@ -1,10 +1,14 @@
 {{template "header"}}
+<link rel="stylesheet" href="./public/css/signin.css">
 </head>
-<body>
+<body class="text-center">
 {{template "navbar"}}
-<main role="main" class="container">
-  <div class="jumbotron">
     <h1>ログイン</h1>
-  </div>
-</main>
+    <form class="form-signin" action="/login" method="POST">
+      <label for="userid" class="sr-only">UserID</label>
+      <input type="text" id="userID" name="userID" class="form-control" placeholder="UserID" required autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">ログイン</button>
+    </form>
 {{template "footer"}}

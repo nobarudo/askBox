@@ -16,3 +16,7 @@ func LoginGet(c *gin.Context) {
 func SignupGet(c *gin.Context) {
 	c.HTML(http.StatusOK, "signup.html", gin.H{})
 }
+
+func HomeGet(c *gin.Context) {
+	c.HTML(http.StatusOK, "home.html", gin.H{})
+}

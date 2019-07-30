@@ -13,6 +13,8 @@ func main() {
 	router.GET("/", c.IndexGet)
 	router.GET("/login", c.LoginGet)
 	router.GET("/signup", c.SignupGet)
+	router.GET("/home", c.HomeGet)
 	router.POST("/signup", c.Signup)
+	router.POST("/login", c.Login)
 	router.Run(":8080")
 }
