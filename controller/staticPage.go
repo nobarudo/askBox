@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"github.com/gin-contrib/sessions"
 	"net/http"
 	"github.com/gin-gonic/gin"
 )
@@ -18,5 +19,11 @@ func SignupGet(c *gin.Context) {
 }
 
 func HomeGet(c *gin.Context) {
-	c.HTML(http.StatusOK, "home.html", gin.H{})
+	session := sessions.Default(c)
+	if session.Get("alive") == true {
+		name := session.Get("nickName")
+		c.HTML(http.StatusOK, "home.html", gin.H{"userName": name})
+	} else {
+		c.Redirect(http.StatusMovedPermanently, "/")
+	}
 }

@@ -24,18 +24,18 @@ func CreateUser(name string, nickName string, password string) {
 	tx.Commit()
 }
 
-func SearchUser(name string) (user []User) {
+func SearchUser(name string) (user User) {
 	db, err := sqlx.Connect("sqlite3", "./db/askbox.db")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	user = []User{}
+	users := []User{}
 
-	err = db.Select(&user, "select * from user where name=?", name)
+	err = db.Select(&users, "select * from user where name=?", name)
 	if err != nil {
 		log.Println(err)
 	}
 
-	return user
+	return users[0]
 }

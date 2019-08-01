@@ -26,8 +26,9 @@ func Login(c *gin.Context) {
 	password := c.Request.Form["password"][0]
 	user := model.SearchUser(name)
 
-	result := passwordVerify(user[0].Password, password)
+	result := passwordVerify(user.Password, password)
 	if result == true {
+		CreateSession(c, user)
 		c.Redirect(http.StatusMovedPermanently, "/home")
 	} else {
 		c.Redirect(http.StatusMovedPermanently, "/login")

@@ -1,12 +1,16 @@
 package main
 
 import (
+	"github.com/gin-contrib/sessions/cookie"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	c "askBox/controller"
 )
 
 func main() {
 	router := gin.Default()
+	store := cookie.NewStore([]byte("secret"))
+	router.Use(sessions.Sessions("session", store))
 	router.Static("/public", "./public")
 	router.LoadHTMLGlob("views/*")
 
