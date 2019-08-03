@@ -24,5 +24,14 @@
     <h1>home</h1>
     <p>質問に答えましょう</p>
   </div>
+  {{ if .question }}
+    <h1>質問</h1>
+    <HR>
+  {{ range $val := .question }}
+   <div class="container">
+     <h3> {{ $val.Text }} </h3>
+   </div>
+  {{ end }}
+  {{end}}
 </main>
 {{template "footer"}}
