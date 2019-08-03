@@ -35,6 +35,11 @@ func Login(c *gin.Context) {
 	}
 }
 
+func Logout(c *gin.Context) {
+	DeleteSession(c)
+	c.Redirect(http.StatusMovedPermanently, "/")
+}
+
 func passwordHash(pass string) (string) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.DefaultCost)
 	if err != nil {

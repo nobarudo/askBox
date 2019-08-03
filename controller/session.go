@@ -13,3 +13,9 @@ func CreateSession(c *gin.Context, user model.User) {
 	session.Set("nickName", user.NickName)
 	session.Save()
 }
+
+func DeleteSession(c *gin.Context) {
+	session := sessions.Default(c)
+	session.Clear()
+	session.Save()
+}
