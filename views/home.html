@@ -1,5 +1,5 @@
 {{template "header"}}
- <link rel="stylesheet" href="./public/css/index.css">
+ <link rel="stylesheet" href="/public/css/home.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -28,8 +28,8 @@
     <h1>質問</h1>
     <HR>
   {{ range $val := .question }}
-   <div class="container">
-     <h3> {{ $val.Text }} </h3>
+    <div class="jumbotron">
+      <p class="questionText"> {{ $val.Text }} </p>
    </div>
   {{ end }}
   {{end}}

@@ -19,7 +19,7 @@ func ShowQuestions(userName string) (questions []Question) {
 	}
 
 	questions = []Question{}
-	err = db.Select(&questions, "select * from question")
+	err = db.Select(&questions, "select * from question where targetUser=?", userName)
 	if err != nil {
 		log.Println(err)
 	}
