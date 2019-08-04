@@ -19,3 +19,12 @@ func GetQuestionList(c *gin.Context) {
 		c.Redirect(http.StatusMovedPermanently, "/")
 	}
 }
+
+func NewQuestion(c *gin.Context) {
+	c.Request.ParseForm()
+	name := c.Param("user")
+	text := c.Request.Form["question"][0]
+	log.Println("name:",name,"text",text)
+	model.AddQuestion(name, text)
+	c.HTML(http.StatusOK, "success.html", gin.H{})
+}

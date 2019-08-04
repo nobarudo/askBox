@@ -26,3 +26,15 @@ func ShowQuestions(userName string) (questions []Question) {
 	log.Println(questions)
 	return questions
 }
+
+func AddQuestion(userName string, text string) {
+	db, err := sqlx.Connect("sqlite3", "./db/askbox.db")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	log.Println("insert前 name:",userName, "text:", text)
+	tx := db.MustBegin()
+	tx.MustExec("INSERT INTO question(targetUser, question) values($1, $2)", userName, text)
+	tx.Commit()
+}

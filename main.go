@@ -19,7 +19,9 @@ func main() {
 	router.GET("/logout", c.Logout)
 	router.GET("/signup", c.SignupGet)
 	router.GET("/home", c.GetQuestionList)
+	router.GET("/box/:user", c.UserBox)
 	router.POST("/signup", c.Signup)
 	router.POST("/login", c.Login)
+	router.POST("/box/:user/new", c.NewQuestion)
 	router.Run(":8080")
 }

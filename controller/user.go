@@ -51,3 +51,8 @@ func passwordHash(pass string) (string) {
 func passwordVerify(hash, pw string) bool {
     return bcrypt.CompareHashAndPassword([]byte(hash), []byte(pw)) == nil
 }
+
+func UserBox(c *gin.Context) {
+	name := c.Param("user")
+	c.HTML(http.StatusOK, "newQuestion.html", gin.H{"name": name})
+}
