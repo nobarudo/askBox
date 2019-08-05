@@ -12,7 +12,7 @@ type Question struct {
 	Text		string	`db:"question"`
 }
 
-func ShowQuestions(userName string) (questions []Question) {
+func ShowQuestionsList(userName string) (questions []Question) {
 	db, err := sqlx.Connect("sqlite3", "./db/askbox.db")
 	if err != nil {
 		log.Fatalln(err)
@@ -37,4 +37,19 @@ func AddQuestion(userName string, text string) {
 	tx := db.MustBegin()
 	tx.MustExec("INSERT INTO question(targetUser, question) values($1, $2)", userName, text)
 	tx.Commit()
+}
+
+func ShowQuestion(id int) (questions []Question){
+	db, err := sqlx.Connect("sqlite3", "./db/askbox.db")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	questions = []Question{}
+	err = db.Select(&questions, "select * from question where id=?", id)
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(questions)
+	return questions
 }

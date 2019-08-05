@@ -1,5 +1,5 @@
 {{template "header"}}
- <link rel="stylesheet" href="/public/css/home.css">
+ <link rel="stylesheet" href="/public/css/reply.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -21,18 +21,13 @@
 </nav>
 <main role="main" class="container">
   <div class="jumbotron">
-    <h1>home</h1>
-    <p>質問に答えましょう</p>
+    <p class="questionText">{{ .question.Text }}</p>
+    <form action="/reply/{{ .question.Id }}" method="POST">
+      <div class="form-group">
+        <textarea class="form-control" name="reply" id="reply"></textarea>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">回答する</button>
+    </form>
   </div>
-  {{ if .question }}
-    <h1>質問</h1>
-    <HR>
-  {{ range $val := .question }}
-    <div class="jumbotron">
-      <p class="questionText"> {{ $val.Text }} </p>
-      <a class="btn btn-lg btn-primary btn-block" href="/reply/{{ $val.Id }}">回答する</a>
-   </div>
-  {{ end }}
-  {{ end }}
 </main>
 {{template "footer"}}

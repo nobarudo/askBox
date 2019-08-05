@@ -20,6 +20,7 @@ func main() {
 	router.GET("/signup", c.SignupGet)
 	router.GET("/home", c.GetQuestionList)
 	router.GET("/box/:user", c.UserBox)
+	router.GET("/reply/:id", c.GetReplyPage)
 	router.POST("/signup", c.Signup)
 	router.POST("/login", c.Login)
 	router.POST("/box/:user/new", c.NewQuestion)
