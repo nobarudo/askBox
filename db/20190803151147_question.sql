@@ -3,7 +3,8 @@
 create table question (
     id integer PRIMARY KEY,
     targetUser  varchar(255) NOT NULL,
-    question    text NOT NULL
+    text    text NOT NULL,
+    reply   text
 );
 -- +goose StatementEnd
 

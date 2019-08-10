@@ -37,3 +37,13 @@ func GetReplyPage(c *gin.Context) {
 	log.Println(question)
 	c.HTML(http.StatusOK, "reply.html", gin.H{"question": question[0]})
 }
+
+func Reply(c *gin.Context) {
+	c.Request.ParseForm()
+	param := c.Param("id")
+	id, _ := strconv.Atoi(param)
+	reply := c.Request.Form["reply"][0]
+	log.Println("id:", id, "reply:", reply)
+	model.UpdateReply(reply, id)
+	c.Redirect(http.StatusMovedPermanently, "/home")
+}

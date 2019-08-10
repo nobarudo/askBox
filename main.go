@@ -24,5 +24,6 @@ func main() {
 	router.POST("/signup", c.Signup)
 	router.POST("/login", c.Login)
 	router.POST("/box/:user/new", c.NewQuestion)
+	router.POST("/reply/:id", c.Reply)
 	router.Run(":8080")
 }

@@ -30,7 +30,12 @@
   {{ range $val := .question }}
     <div class="jumbotron">
       <p class="questionText"> {{ $val.Text }} </p>
-      <a class="btn btn-lg btn-primary btn-block" href="/reply/{{ $val.Id }}">回答する</a>
+      {{ if $val.Reply }}
+        <hr>
+        <P class="replyText"> {{ $val.Reply }} </P>
+      {{ else }}
+        <a class="btn btn-lg btn-primary btn-block" href="/reply/{{ $val.Id }}">回答する</a>
+      {{ end }}
    </div>
   {{ end }}
   {{ end }}

@@ -9,7 +9,8 @@ import (
 type Question struct {
 	Id			int		`db:"id"`
 	TargetUser	string	`db:"targetUser"`
-	Text		string	`db:"question"`
+	Text		string	`db:"text"`
+	Reply		*string	`db:"reply"`
 }
 
 func ShowQuestionsList(userName string) (questions []Question) {
@@ -23,7 +24,7 @@ func ShowQuestionsList(userName string) (questions []Question) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(questions)
+	log.Println("model", questions)
 	return questions
 }
 
@@ -35,7 +36,7 @@ func AddQuestion(userName string, text string) {
 
 	log.Println("insert前 name:",userName, "text:", text)
 	tx := db.MustBegin()
-	tx.MustExec("INSERT INTO question(targetUser, question) values($1, $2)", userName, text)
+	tx.MustExec("INSERT INTO question(targetUser, text) values($1, $2)", userName, text)
 	tx.Commit()
 }
 
@@ -52,4 +53,16 @@ func ShowQuestion(id int) (questions []Question){
 	}
 	log.Println(questions)
 	return questions
+}
+
+func UpdateReply(reply string, id int) {
+	db, err := sqlx.Connect("sqlite3", "./db/askbox.db")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	log.Println("update前 id:",id, "reply:", reply)
+	tx := db.MustBegin()
+	tx.MustExec("UPDATE question set reply=$1 where id=$2 ", reply, id)
+	tx.Commit()
 }
