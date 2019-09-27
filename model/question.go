@@ -24,7 +24,6 @@ func ShowQuestionsList(userName string) (questions []Question) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println("model", questions)
 	return questions
 }
 
@@ -51,7 +50,6 @@ func ShowQuestion(id int) (questions []Question){
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(questions)
 	return questions
 }
 
@@ -61,7 +59,6 @@ func UpdateReply(reply string, id int) {
 		log.Fatalln(err)
 	}
 
-	log.Println("update前 id:",id, "reply:", reply)
 	tx := db.MustBegin()
 	tx.MustExec("UPDATE question set reply=$1 where id=$2 ", reply, id)
 	tx.Commit()

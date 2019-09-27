@@ -12,9 +12,7 @@ func Signup(c *gin.Context) {
 	c.Request.ParseForm()
 	name := c.Request.Form["userID"][0]
 	nickname := c.Request.Form["userName"][0]
-	pass := c.Request.Form["password"][0]
-	password := passwordHash(pass)
-	log.Println("userID:", name, "userName", nickname,"password", password)
+	password := passwordHash(c.Request.Form["password"][0])
 	model.CreateUser(name, nickname, password)
 
 	c.HTML(http.StatusOK, "createUser.html", gin.H{})
@@ -22,9 +20,8 @@ func Signup(c *gin.Context) {
 
 func Login(c *gin.Context) {
 	c.Request.ParseForm()
-	name := c.Request.Form["userID"][0]
 	password := c.Request.Form["password"][0]
-	user := model.SearchUser(name)
+	user := model.SearchUser(c.Request.Form["userID"][0])
 
 	result := passwordVerify(user.Password, password)
 	if result == true {
@@ -36,8 +33,9 @@ func Login(c *gin.Context) {
 }
 
 func Logout(c *gin.Context) {
+	log.Println("logout")
 	DeleteSession(c)
-	c.Redirect(http.StatusMovedPermanently, "/")
+	IndexGet(c)
 }
 
 func passwordHash(pass string) (string) {
